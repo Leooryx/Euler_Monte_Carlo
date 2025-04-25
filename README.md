@@ -1,52 +1,47 @@
+```markdown
 # 📐 Estimating Euler's Constant γ
 
 Euler's constant is defined as:
 
-\[
-\gamma = \lim_{n \to \infty} \left( \sum_{k=1}^n \frac{1}{k} - \log(n) \right) = \sum_{k=1}^\infty \left( \frac{1}{k} - \log\left(1 + \frac{1}{k}\right) \right)
-\]
+γ = limₙ→∞ ( ∑ₖ₌₁ⁿ 1/k − log(n) )  
+  = ∑ₖ₌₁^∞ ( 1/k − log(1 + 1/k) )
 
-It can also be written as:
+It also admits an integral form:
 
-\[
-\gamma = -\int_0^1 \log(-\log x)\,dx
-\]
+γ = −∫₀¹ log(−log x) dx
 
 ---
 
 ## 1. Importance Sampling
 
-We derived an unbiased estimator of γ using importance sampling with a proposal distribution of the form \( X = \lceil c / U^\alpha \rceil \), where \( U \sim \mathcal{U}[0,1] \). The choice of \( c \) and \( \alpha \) ensures proper tail behavior to capture contributions from large \( k \).
+We derived an unbiased estimator of γ using importance sampling with a proposal of the form X = ⌈c / U^α⌉, where U ~ Uniform[0,1]. The parameters c and α were chosen to ensure good coverage of the summation tail.
 
 ---
 
 ## 2. Monte Carlo Estimation
 
-Using the integral form, we estimated γ via:
+We estimated γ using its integral representation with three methods:
 - Standard Monte Carlo
 - Stratified Monte Carlo
 - Quasi-Monte Carlo (Sobol sequences)
 
-We compared their convergence rates visually.
+We compared the convergence rates of the estimators through visualizations.
 
 ---
 
 ## 3. Control Variates
 
-To reduce variance, we used control variates based on \( \log(1 - U) \), leveraging the approximation \( \log x \approx x - 1 \) near 1. We repeated the Monte Carlo estimations and showed the improvement.
+To reduce variance, we introduced control variates based on log(1 − U), using the approximation log(x) ≈ x − 1 near 1. We re-estimated γ with these variates and showed the improvement in convergence.
 
 ---
 
 ## 4. Truncated Sum Estimator
 
-We used a truncated estimator of the form:
+We used a truncated sum estimator of the form:
 
-\[
-\sum_{k=0}^R \frac{a_k}{\mathbb{P}(R \geq k)}
-\]
+  ∑ₖ₌₀^R aₖ / P(R ≥ k)
 
-We showed it is unbiased, and chose two distributions for \( R \) to keep variance finite. This allowed estimation of γ from its series definition.
+We proved its unbiasedness and selected a distribution for R that ensures low variance. This method allowed us to estimate γ from its original series definition.
 
 ---
-
-
+```
